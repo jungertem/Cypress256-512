@@ -155,6 +155,20 @@ namespace Cypress
             return encryptedMessage.ToArray();
         }
 
+        public uint[] DecryptAll(List<uint> encryptedMessage)
+        {
+            _roundKeys.Reverse();
+
+            var decryptedMessage = new List<uint>();
+            for (int i = 0; i < encryptedMessage.Count / 8; i++)
+            {
+                var plainTextPart = encryptedMessage.GetRange(i, 8).ToArray();
+                var decryptedPart = EncryptBlock(plainTextPart);
+                decryptedMessage.AddRange(decryptedPart);
+            }
+
+            return decryptedMessage.ToArray();
+        }
         private void Init()
         {
             r0 = _circularShiftValues[0];

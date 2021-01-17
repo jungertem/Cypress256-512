@@ -156,6 +156,21 @@ namespace Cypress
             return encryptedMessage.ToArray();
         }
 
+        public ulong[] DecryptAll(List<ulong> encryptedMessage)
+        {
+            _roundKeys.Reverse();
+
+            var decryptedMessage = new List<ulong>();
+            for (int i = 0; i < encryptedMessage.Count / 8; i++)
+            {
+                var plainTextPart = encryptedMessage.GetRange(i, 8).ToArray();
+                var decryptedPart = EncryptBlock(plainTextPart);
+                decryptedMessage.AddRange(decryptedPart);
+            }
+
+            return decryptedMessage.ToArray();
+        }
+
         private void Init()
         {
             r0 = _circularShiftValues[0];

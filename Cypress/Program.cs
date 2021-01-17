@@ -8,7 +8,8 @@ namespace Cypress
 {
     class Program
     {
-        static string textPath = @"C:\Users\junge\source\repos\Cypress\Cypress\1984.txt";
+        static string textPath = @"C:\Users\junge\source\repos\Cypress\Cypress\1984_en.txt";
+        static string encryptedPath = @"C:\Users\junge\source\repos\Cypress\Cypress\Result.txt";
 
         static void Main(string[] args)
         {
@@ -37,6 +38,7 @@ namespace Cypress
 
 
             var encrypted = cypr.FullEncrypt(text32.ToList());
+            encrypted.GetTextFromUintArr(encryptedPath);
             //var encrypted = cypar512.FullEncrypt(text64.ToList());
 
             watch.Stop();

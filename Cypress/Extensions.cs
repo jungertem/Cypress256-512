@@ -96,5 +96,19 @@ namespace Cypress
 
             return obtainedUints.ToArray();
         }
+
+        public static void GetTextFromUintArr(this uint[] array, string path)
+        {
+            var obtainedBytes = array.SelectMany(x => BitConverter.GetBytes(x)).ToArray();
+            string result = System.Text.Encoding.UTF8.GetString(obtainedBytes);
+            File.WriteAllText(path, result);
+        }
+
+        public static void GetTextFromUlongArr(this ulong[] array, string path)
+        {
+            var obtainedBytes = array.SelectMany(x => BitConverter.GetBytes(x)).ToArray();
+            string result = System.Text.Encoding.UTF8.GetString(obtainedBytes);
+            File.WriteAllText(path, result);
+        }
     }
 }
